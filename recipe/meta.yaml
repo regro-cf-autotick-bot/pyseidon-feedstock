@@ -12,16 +12,16 @@ source:
     - setup.patch
 
 build:
-  number: 2
+  number: 3
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   host:
-    - python <3
+    - python {{ python_min }}
     - pip
   run:
-    - python <3
+    - python >={{ python_min }},<3
     - h5py
     - utide
     - numpy
@@ -35,6 +35,8 @@ requirements:
     - matplotlib-base
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - pyseidon
 
